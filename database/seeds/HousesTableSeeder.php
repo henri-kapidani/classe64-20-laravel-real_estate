@@ -56,7 +56,7 @@ class HousesTableSeeder extends Seeder
             House::create($riga);
         }
 
-        for ($i = 0; $i < 10000; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             $house = new House();
             // $house->city = $this->cities[rand(0, 4)];
             $house->city = $faker->city();
