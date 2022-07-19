@@ -26,22 +26,36 @@ class HousesController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'city'      => 'required|string|max:50',
+            'price'     => 'numeric',
+            'street'    => 'required|string|max:100',
+            'is_rent'   => 'boolean',
+            'free_from' => 'date',
+            'rooms'     => 'integer|max:20',
+            'surface'   => 'numeric',
+        ]);
         $formData = $request->all();
         // dump($request);
-        // dump($formData);
+        // dd($formData);
 
-        $house = new House();
-        $house->city = $formData['city'];
-        $house->price = $formData['price'];
-        $house->street = $formData['street'];
-        $house->is_rent = $formData['is_rent'];
-        $house->free_from = $formData['free_from'];
-        $house->rooms = $formData['rooms'];
-        $house->surface = $formData['surface'];
-        // TODO: validare i dati prima di inviarli al database
-        $house->save();
+        //Opzione 1
+        // $house = new House();
+        // $house->city = $formData['city'];
+        // $house->price = $formData['price'];
+        // $house->street = $formData['street'];
+        // $house->is_rent = $formData['is_rent'];
+        // $house->free_from = $formData['free_from'];
+        // $house->rooms = $formData['rooms'];
+        // $house->surface = $formData['surface'];
+        // // TODO: validare i dati prima di inviarli al database
+        // $house->save();
 
-        // TODO: fare il redirect
+        //Opzione 2 (se abbiamo definito $fillable nel model)
+        $house = House::create($formData);
+
+        // return redirect()->route('houses.index');
+        return redirect()->route('houses.show', ['house' => $house]);
     }
 
 
@@ -63,20 +77,26 @@ class HousesController extends Controller
     }
 
 
-    public function edit($id)
+    public function edit(House $house)
     {
-        //
+        return view('admin.houses.edit', compact('house'));
     }
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request, House $house)
     {
-        //
+        $formData = $request->all();
+        $house->update($formData); //(se abbiamo definito $fillable nel model)
+
+        return redirect()->route('houses.show', ['house' => $house]);
     }
 
 
-    public function destroy($id)
+    public function destroy(House $house)
     {
-        //
+        // TODO: inplement soft deleting
+        $house->delete();
+
+        return redirect()->route('houses.index');
     }
 }

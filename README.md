@@ -25,12 +25,12 @@
 
 ## Passi per scaricare un progetto Laravel:
 1. copiare .env.example nella stessa cartella e rinominarlo .env
-1. php artisan key:generate
 1. aggiornare la sezione del database nel file .env con id dati del proprio database
 1. installare le librerie php con:
 	```
     composer install
     ```
+1. php artisan key:generate
 1. finita l'installazione installare le librerie js con:
     ```
 	npm install
