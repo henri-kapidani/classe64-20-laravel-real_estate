@@ -30,7 +30,10 @@
 	```
     composer install
     ```
-1. php artisan key:generate
+1. Generare la chiave:
+	```
+    php artisan key:generate
+    ```
 1. finita l'installazione installare le librerie js con:
     ```
 	npm install
