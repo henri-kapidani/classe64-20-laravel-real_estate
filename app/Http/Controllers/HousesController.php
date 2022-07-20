@@ -9,11 +9,19 @@ class HousesController extends Controller
 {
     // TODO: personalizzare la pagina 404
 
-    public function index()
+    public function index(Request $request)
     {
-        $houses = House::all();
-        // dump($houses);
-        // TODO: implementare la paginazione dei risultati
+        $perPage = 15;
+        $searchTerm = $request->query('q');
+
+        if ($searchTerm) {
+            $houses = House::where('city', 'LIKE', $searchTerm)
+                        ->orWhere('street', 'LIKE', $searchTerm)
+                        ->paginate($perPage);
+        } else {
+            $houses = House::paginate($perPage);
+        }
+
         return view('admin.houses.index', compact('houses'));
     }
 
@@ -85,6 +93,15 @@ class HousesController extends Controller
 
     public function update(Request $request, House $house)
     {
+        $request->validate([
+            'city'      => 'required|string|max:50',
+            'price'     => 'numeric',
+            'street'    => 'required|string|max:100',
+            'is_rent'   => 'boolean',
+            'free_from' => 'date',
+            'rooms'     => 'integer|max:20',
+            'surface'   => 'numeric',
+        ]);
         $formData = $request->all();
         $house->update($formData); //(se abbiamo definito $fillable nel model)
 

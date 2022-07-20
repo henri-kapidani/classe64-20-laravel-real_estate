@@ -8,7 +8,7 @@
 
         <div class="mb-3">
             <label class="form-label" for="city">City</label>
-            <input class="form-control" type="text" name="city" id="city">
+            <input class="form-control" type="text" name="city" id="city" value="{{ old('city') }}">
             @error('city')
                 <div class="alert alert-danger mt-2" role="alert">
                     {{ $message }}
@@ -17,7 +17,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="price">Price</label>
-            <input class="form-control" type="text" name="price" id="price">
+            <input class="form-control" type="text" name="price" id="price" value="{{ old('price') }}">
             @error('price')
                 <div class="alert alert-danger mt-2" role="alert">
                     {{ $message }}
@@ -26,7 +26,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="street">Street</label>
-            <input class="form-control" type="text" name="street" id="street">
+            <input class="form-control" type="text" name="street" id="street" value="{{ old('street') }}">
             @error('street')
                 <div class="alert alert-danger mt-2" role="alert">
                     {{ $message }}
@@ -35,7 +35,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="is_rent">Is rent</label>
-            <input class="form-control" type="text" name="is_rent" id="is_rent">
+            <input class="form-control" type="text" name="is_rent" id="is_rent" value="{{ old('is_rent') }}">
             @error('is_rent')
                 <div class="alert alert-danger mt-2" role="alert">
                     {{ $message }}
@@ -44,7 +44,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="free_from">Free from</label>
-            <input class="form-control" type="date" name="free_from" id="free_from">
+            <input class="form-control" type="date" name="free_from" id="free_from" value="{{ old('free_from') }}">
             @error('free_from')
                 <div class="alert alert-danger mt-2" role="alert">
                     {{ $message }}
@@ -53,7 +53,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="rooms">Rooms</label>
-            <input class="form-control" type="number" name="rooms" id="rooms">
+            <input class="form-control" type="number" name="rooms" id="rooms" value="{{ old('rooms') }}">
             @error('rooms')
                 <div class="alert alert-danger mt-2" role="alert">
                     {{ $message }}
@@ -62,7 +62,7 @@
         </div>
         <div class="mb-3">
             <label class="form-label" for="surface">Surface</label>
-            <input class="form-control" type="number" name="surface" id="surface" step="0.01">
+            <input class="form-control" type="number" name="surface" id="surface" step="0.01" value="{{ old('surface') }}">
             @error('surface')
                 <div class="alert alert-danger mt-2" role="alert">
                     {{ $message }}

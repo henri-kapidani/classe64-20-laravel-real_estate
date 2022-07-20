@@ -17,7 +17,7 @@
         </thead>
         <tbody>
             @foreach ($houses as $house)
-                <tr>
+                <tr data-id="{{ $house->id }}">
                     <td>{{ $house->id }}</td>
                     <td>{{ $house->city }}</td>
                     <td>{{ $house->price }}</td>
@@ -33,14 +33,28 @@
                         <a href="{{ route('houses.edit', ['house' => $house]) }}" class="btn btn-warning">Edit</a>
                     </td>
                     <td>
-                        <form action="{{ route('houses.destroy', ['house' => $house]) }}" method="post">
+                        <button class="btn btn-danger js-delete">Delete</button>
+                        {{-- <form action="{{ route('houses.destroy', ['house' => $house]) }}" method="post">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
+                            <button type="submit" class="btn btn-danger js-delete">Delete</button>
+                        </form> --}}
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+
+    {{ $houses->links() }}
+
+    <section class="overlay d-none">
+        <form class="popup" data-action="{{ route('houses.destroy', ['house' => '*****']) }}" method="post">
+            @csrf
+            @method('DELETE')
+
+            <h1>Sei sicuro?</h1>
+            <button type="submit" class="btn btn-warning js-yes">Yes</button>
+            <button type="button" class="btn btn-danger js-no">No</button>
+        </form>
+    </section>
 @endsection
